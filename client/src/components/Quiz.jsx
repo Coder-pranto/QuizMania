@@ -1,10 +1,16 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React, { useEffect } from 'react'
 import Questions from './Questions';
 
-
+import { useSelector } from "react-redux";
 const Quiz = () => {
 
+    const state = useSelector(state => state);
+
+    useEffect(() => {
+       console.log(state);
+    }, [])
+    
 
     const onPrev = () => {
         console.log("klsdjf");
