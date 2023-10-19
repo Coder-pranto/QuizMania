@@ -3,14 +3,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './Main';
 import Quiz from './Quiz';
 import Result from './Result';
+import { CheckUserExists } from '../helper/helper';
 
 function App() {
   return (
-    <BrowserRouter>
+<BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/quiz" element={<Quiz />} />
-        <Route path="/result" element={<Result />} />
+        <Route path="/quiz" element={<CheckUserExists><Quiz /></CheckUserExists>} />
+        <Route path="/result" element={<CheckUserExists><Result /></CheckUserExists>} />
       </Routes>
     </BrowserRouter>
   );

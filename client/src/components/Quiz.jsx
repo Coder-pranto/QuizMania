@@ -5,18 +5,18 @@ import Questions from './Questions';
 import { useDispatch, useSelector } from "react-redux";
 import { MoveNextQuestion, MovePrevQuestion } from '../hooks/fetchQuestion';
 import { PushAnswer } from '../hooks/setResult';
+import {Navigate} from 'react-router-dom';
 
 const Quiz = () => {
 
     const dispatch = useDispatch();
     
     const { queue, trace } = useSelector(state => state.questions);
-    const state = useSelector(state => state.results);
-    const [questionsFinished, setQuestionsFinished] = useState(false);
+    const result= useSelector(state => state.results.result);
     const [checked, setChecked] = useState(undefined);
 
     useEffect(() => {
-       console.log(state);
+       console.log(result);
     })
 
     const onChecked = (check) =>{
@@ -28,7 +28,6 @@ const Quiz = () => {
         console.log("prev button clicked!");
         if(trace>0){
             dispatch(MovePrevQuestion());
-            setQuestionsFinished(false);
         }
     }
 
@@ -36,30 +35,28 @@ const Quiz = () => {
         console.log("next button clicked!");
         if(queue.length>trace){
             dispatch(MoveNextQuestion());
-            dispatch(PushAnswer(checked));
-        }if(queue.length==trace+1){
-            setQuestionsFinished(true);
+            
         }
-        
+        /** insert a new result in the array.  */
+        if(result.length<=trace){
+            dispatch(PushAnswer(checked));
+        }
+
+        setChecked(undefined);
+    }
+    /**finished exam after the last question */
+    if(result.length && result.length>=queue.length){
+        return <Navigate to='/result' replace={true}></Navigate>
     }
 
     return (
         <div className="container">
-            <h1 className="text-dark p-3 rounded" style={{ border: '3px solid #007bff' }}>
-                Quiz Application
-            </h1>
-
-
+            <h1 className="text-dark p-3 rounded" style={{ border: '3px solid #007bff' }}>Quiz Application</h1>
+                
             <Questions onChecked={onChecked} />
-            {questionsFinished && (
-                <p style={{ marginTop: '10px', color: 'red', fontWeight: 'bold' }}>
-                    Question is finished
-                </p>
-            )}
-
 
             <div className="d-flex justify-content-between">
-                <button className="btn btn-warning" onClick={onPrev}>Prev</button>
+               {trace>0 ?  <button className="btn btn-warning" onClick={onPrev}>Prev</button>:<div></div>}
                 <button className="btn btn-warning" onClick={onNext}>Next</button>
             </div>
 

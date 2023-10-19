@@ -9,9 +9,11 @@ export const questionReducer = createSlice({
     },
     reducers:{
         startExamAction : (state, action)=>{
+            let { questions, answers} = action.payload
             return {
                 ...state,
-                queue: action.payload
+                queue : questions,
+                answers: answers
             }
         },
         moveNextAction : (state)=>{
@@ -26,9 +28,15 @@ export const questionReducer = createSlice({
                 trace: state.trace-1
             }
         },
-    
+        resetAllAction: () =>{
+            return {
+                queue: [],
+                answers:[],
+                trace: 0
+        }
+     }
     }
 })
 
-export const {startExamAction,  movePrevAction,  moveNextAction} = questionReducer.actions;
+export const {startExamAction,  movePrevAction,  moveNextAction, resetAllAction} = questionReducer.actions;
 export default questionReducer.reducer;

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
-import { data } from "../database/data";
+import { data , answers} from "../database/data";
 import * as Action from '../redux/question_reducer';
 // eslint-disable-next-line react-refresh/only-export-components
 export const useFetchQuestion = () => {
@@ -20,7 +20,7 @@ export const useFetchQuestion = () => {
                 let questions = await data;
                 setGetData((prev) => ({ ...prev, isLoading: false }));
                 setGetData((prev) => ({ ...prev, apiData: questions }));
-                dispatch(Action.startExamAction(questions));
+                dispatch(Action.startExamAction({questions, answers}));
             } catch (error) {
                 setGetData((prev) => ({ ...prev, isLoading: false }));
                 setGetData((prev) => ({ ...prev, serverError: error }));
