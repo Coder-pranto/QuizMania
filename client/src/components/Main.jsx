@@ -16,7 +16,7 @@ const Main = () => {
     return (
         <div className="container">
             <h1 className="text-dark p-3 rounded" style={{ border: '3px solid #007bff' }}>
-                Quiz Application
+                QuizMania 
             </h1>
 
             <ol className='text-left' type="I">
