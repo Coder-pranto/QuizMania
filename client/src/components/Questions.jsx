@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+
 import React, { useEffect, useState } from 'react';
 import { useFetchQuestion } from '../hooks/fetchQuestion.jsx';
 import { updateResult } from '../hooks/setResult.jsx'; 
@@ -22,16 +21,26 @@ const Questions = ({onChecked}) => {
         console.log('radio button selected');
         onChecked(i);
         setChecked(i);
+        dispatch(updateResult({ trace, checked }));
     };
 
     if(isLoading) return <h3 className='text-light'>isLoading</h3>
-    if(serverError) return <h3 className='text-light'>{serverError || "Unknown Error"}</h3>
+    // if(serverError) return <h3 className='text-light'>{serverError || "Unknown Error"}</h3>
+    if (serverError) {
+        // Convert the error object to a string
+        const errorString = serverError.toString();
+    
+        return (
+            <h3 className='text-light'>{errorString || "Unknown Error"}</h3>
+        );
+    }
+    
 
     return (
 <div className="container">
-    <h3 className="text-dark p-3">
+    <h2 className="text-dark p-3">
         {question?.question}
-    </h3>
+    </h2>
     <ul key={question?.id} style={{ listStyle: 'none', padding: 0 }}>
         {question?.options.map((option, idx) => (
             <li key={idx} className="d-flex align-items-center ml-4">

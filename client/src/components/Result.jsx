@@ -10,10 +10,6 @@ const Result = () => {
     const dispatch = useDispatch()
     const { questions : { queue ,answers}, results : { result, userId}}  = useSelector(state => state)
    
-    useEffect(() => {
-   console.log(attempts);
-   console.log(flag);
-    })
     
     const onRestart = () => {
         dispatch(resetAllAction());

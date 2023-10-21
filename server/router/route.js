@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const {getAllQuestion, createQuestion, deleteAllQuestion} = require('../controllers/questions.controller');
-const {getResult, storeResult, dropResult} = require('../controllers/result.controller');
+const {getAllResults, storeResult, dropResults} = require('../controllers/result.controller');
 
 router.route('/questions').get(getAllQuestion).post(createQuestion).delete(deleteAllQuestion);
-router.route('/result').get(getResult).post(storeResult).delete(dropResult);
+router.route('/result').get(getAllResults).post(storeResult).delete(dropResults);
 
 
 
