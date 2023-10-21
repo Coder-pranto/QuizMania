@@ -1,5 +1,5 @@
 const Question = require("../models/questionSchema");
-const { questions, answers } = require("../database/data.js");
+const { questions, answers } = require("../database/data");
 
 const getAllQuestion = async (req, res) => {
   try {

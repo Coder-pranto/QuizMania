@@ -1,8 +1,7 @@
 /**this custom hook will fetch data from fetch api data fro set the value to store */
-
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
-import { data , answers} from "../database/data";
+
 import * as Action from '../redux/question_reducer.js';
 import { getServerData } from "../helper/helper.jsx";
 // eslint-disable-next-line react-refresh/only-export-components
@@ -18,11 +17,10 @@ export const useFetchQuestion = () => {
 
         (async () => {
             try {
-                // let questions = await data;
                 const [{ questions, answers }] = await getServerData(`http://localhost:5000/api/questions`, (data) => data)
-                //    console.log(q);
+
                if (questions.length>0) {
-                console.log(questions.length);
+                // console.log(questions.length);
                 setGetData((prev) => ({ ...prev, isLoading: false }));
                 setGetData((prev) => ({ ...prev, apiData: questions }));
                 dispatch(Action.startExamAction({questions, answers}));

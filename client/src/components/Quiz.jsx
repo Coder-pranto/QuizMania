@@ -15,9 +15,9 @@ const Quiz = () => {
     const result= useSelector(state => state.results.result);
     const [checked, setChecked] = useState(undefined);
 
-    useEffect(() => {
-       console.log(result);
-    })
+    // useEffect(() => {
+    //    console.log(result);
+    // })
 
     const onChecked = (check) =>{
         setChecked(check);
@@ -25,14 +25,14 @@ const Quiz = () => {
     
 
     const onPrev = () => {
-        console.log("prev button clicked!");
+        // console.log("prev button clicked!");
         if(trace>0){
             dispatch(MovePrevQuestion());
         }
     }
 
     const onNext = () => {
-        console.log("next button clicked!");
+        // console.log("next button clicked!");
         if(queue.length>trace){
             dispatch(MoveNextQuestion());
             

@@ -18,14 +18,13 @@ const Questions = ({onChecked}) => {
     }, [checked]);
 
     const onSelect = (i) => {
-        console.log('radio button selected');
+        // console.log('radio button selected');
         onChecked(i);
         setChecked(i);
         dispatch(updateResult({ trace, checked }));
     };
 
     if(isLoading) return <h3 className='text-light'>isLoading</h3>
-    // if(serverError) return <h3 className='text-light'>{serverError || "Unknown Error"}</h3>
     if (serverError) {
         // Convert the error object to a string
         const errorString = serverError.toString();

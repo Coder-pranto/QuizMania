@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetAllAction } from '../redux/question_reducer';
 import { resetResultAction } from '../redux/result_reducer';
 import { attempts_Number, earnPoints_Number, flagResult } from '../helper/helper';
+import { usePublishResult } from '../hooks/setResult';
 const Result = () => {
     const dispatch = useDispatch()
     const { questions : { queue ,answers}, results : { result, userId}}  = useSelector(state => state)
@@ -20,6 +21,17 @@ const Result = () => {
     const attempts = attempts_Number(result);
     const earnPoints = earnPoints_Number(result, answers, 10)
     const flag = flagResult(totalPoints, earnPoints)
+
+
+       /** store user result */
+    usePublishResult({
+        result,
+        username: userId,
+        attempts,
+        points: earnPoints,
+        achieved: flag ? "Passed" : "Failed"
+    });
+
     return (
         <div className="container">
             <h1 className="text-dark p-3 rounded" style={{ border: '3px solid #007bff' }}>
@@ -29,7 +41,7 @@ const Result = () => {
             <div className='border p-3 border-warning'>
                 <div className='d-flex justify-content-between'>
                     <span>Username</span>
-                    <span>Pranto</span>
+                    <span>{userId || ""}</span>
                 </div>
                 <div className='d-flex justify-content-between'>
                     <span>Total Quiz Points : </span>

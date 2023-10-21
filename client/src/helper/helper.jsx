@@ -26,7 +26,7 @@ const getServerData = async (url, callback) => {
     try {
         const response = await axios.get(url);
         const data = response.data;
-        console.log("Response data:", data); // Log the response data
+        // console.log("Response data:", data); // Log the response data
         return callback ? callback(data) : data;
     } catch (error) {
         console.error("Error:", error);
@@ -39,7 +39,7 @@ const postServerData = async (url, result, callback) => {
     try {
         const response = await axios.post(url, result);
         const data = response.data;
-        console.log("Response data:", data); // Log the response data
+        // console.log("Response data:", data); // Log the response data
         return callback ? callback(data) : data;
     } catch (error) {
         console.error("Error:", error);
